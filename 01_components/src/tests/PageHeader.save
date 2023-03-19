@@ -1,0 +1,20 @@
+import { describe, expect, test } from 'vitest';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import PageHeader from '../components/appPageHeader/PageHeader';
+
+describe('PageHeader component', () => {
+  test('should render page name and navigation links', () => {
+    const pageName = 'Test Page';
+    render(<PageHeader page_name={pageName} />);
+
+    const pageNameElement = screen.getByText(pageName);
+    expect(pageNameElement).toBeInTheDocument();
+
+    const homeLink = screen.getByRole('link', { name: 'Home' });
+    expect(homeLink).toHaveAttribute('href', '/');
+
+    const aboutLink = screen.getByRole('link', { name: 'About' });
+    expect(aboutLink).toHaveAttribute('href', '/about');
+  });
+});
