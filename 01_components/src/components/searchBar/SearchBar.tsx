@@ -36,8 +36,8 @@ class SearchBar extends React.Component<Props, State> {
           <input
             type="text"
             value={this.state.value}
-            onChange={this.handleChange}
             placeholder="Search..."
+            onChange={this.handleChange}
           />
         </div>
       </div>
