@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import MainPage from '../pages/MainPage';
-import AboutUsPage from '../pages/AboutUs';
-import Page404 from '../pages/404';
+import MainPage from '../pages/mainPage/MainPage';
+import AboutUsPage from '../pages/about/AboutUs';
+import Page404 from '../pages/404/404';
 
 import './App.css';
 

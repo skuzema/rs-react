@@ -16,11 +16,7 @@ interface CardListProps {
 class CardList extends Component<CardListProps> {
   constructor(props: CardListProps | Readonly<CardListProps>) {
     super(props);
-    this.state = {
-      cardData: [],
-    };
   }
-
   render() {
     const { cardData } = this.props;
     return (

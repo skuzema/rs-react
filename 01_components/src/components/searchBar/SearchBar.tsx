@@ -2,18 +2,13 @@ import React from 'react';
 
 import './SearchBar.css';
 
-interface Props {
-  name: string;
-}
-
 interface State {
   value: string;
 }
 
-class SearchBar extends React.Component<Props, State> {
-  constructor(props: Props) {
+class SearchBar extends React.Component<any, State>{
+  constructor(props: any) {
     super(props);
-
     this.state = {
       value: localStorage.getItem('searchValue') || '',
     };

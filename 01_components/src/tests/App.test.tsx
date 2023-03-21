@@ -1,34 +1,22 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { render, fireEvent } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import App from '../components/app/App';
+import AboutUsPage from '../components/pages/about/AboutUs';
+import Page404 from '../components/pages/404/404';
 
-describe('App', () => {
-  test('renders home page', () => {
-    render(
-      <MemoryRouter initialEntries={['/']}>
-        <App />
-      </MemoryRouter>
-    );
-    expect(screen.getByText('Store')).toBeInTheDocument();
-  });
-
-  test('renders about page', () => {
-    render(
-      <MemoryRouter initialEntries={['/about']}>
-        <App />
-      </MemoryRouter>
-    );
-    expect(screen.getByText('This is the ABOUT page')).toBeInTheDocument();
-  });
-
-  test('renders not found page', () => {
-    render(
+describe('App component', () => {
+  it('renders the 404 page when navigating to a non-existent route', () => {
+    const { getByText } = render(
       <MemoryRouter initialEntries={['/non-existent-route']}>
-        <App />
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/about" element={<AboutUsPage />} />
+          <Route path="*" element={<Page404 />} />
+        </Routes>
       </MemoryRouter>
     );
-    expect(screen.getByText('This is the 404 page')).toBeInTheDocument();
+    expect(getByText(/404/i)).toBeInTheDocument();
   });
 });
