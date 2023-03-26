@@ -1,0 +1,56 @@
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	background-color: #fff;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+.navbar-nav {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+}
+
+.navbar-nav>.nav-item {
+	font-size: 14px;
+	padding-top: 1.2rem;
+	padding-bottom: 1.2rem;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: 400;
+	position: relative;
+	list-style-type: none
+}
+
+.navbar-nav .nav-link {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.navbar-nav input[type="submit"] {
+	font-family: 'Maven Pro', sans-serif;
+	font-size: 14px;
+	text-decoration: none;
+	text-transform: uppercase;
+	background: #189cf0;
+	display: inline-block;
+	padding: 16px 38px;
+	border: 2px solid transparent;
+	border-radius: 40px;
+	color: #fff;
+	font-weight: 400;
+	-webkit-transition: 0.2s all;
+	transition: 0.2s all;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.navbar-nav input[type="submit"]:hover {
+	background-color: #fff;
+	border-color: #189cf0;
+	color: #189cf0;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

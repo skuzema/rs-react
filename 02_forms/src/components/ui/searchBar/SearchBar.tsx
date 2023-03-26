@@ -6,7 +6,7 @@ interface State {
   value: string;
 }
 
-class SearchBar extends React.Component<any, State>{
+class SearchBar extends React.Component<any, State> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -27,7 +27,7 @@ class SearchBar extends React.Component<any, State>{
   render() {
     return (
       <div className="conatiner">
-        <div className="src-cnt">
+        <div className="search-bar">
           <input
             type="text"
             value={this.state.value}

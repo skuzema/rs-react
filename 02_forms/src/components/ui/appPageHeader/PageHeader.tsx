@@ -18,6 +18,9 @@ class PageHeader extends React.Component<PageProps> {
             <NavLink to="/">Home</NavLink>
           </li>
           <li className="nav-item">
+            <NavLink to="/new">Form</NavLink>
+          </li>
+          <li className="nav-item">
             <NavLink to="/about">About</NavLink>
           </li>
         </ul>

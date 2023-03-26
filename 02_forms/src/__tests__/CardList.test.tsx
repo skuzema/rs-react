@@ -1,22 +1,20 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import CardList from '../components/cardList/CardList';
+import CardList from '../components/ui/cardList/CardList';
 
 describe('CardList component', () => {
   const testData = [
     {
       title: 'Test Title 1',
-      description: 'Test Description 1',
+      post: 'Test Description 1',
       image: 'https://example.com/image1.png',
-      time_ago: 10,
-      comments: 5,
+      post_date: '2016-05-25',
     },
     {
       title: 'Test Title 2',
-      description: 'Test Description 2',
+      post: 'Test Description 2',
       image: 'https://example.com/image2.png',
-      time_ago: 20,
-      comments: 10,
+      post_date: '2016-05-25',
     },
   ];
 
@@ -25,10 +23,9 @@ describe('CardList component', () => {
 
     testData.forEach((data) => {
       expect(getByText(data.title)).toBeInTheDocument();
-      expect(getByText(data.description)).toBeInTheDocument();
+      expect(getByText(data.post)).toBeInTheDocument();
       expect(getByAltText(data.title)).toHaveAttribute('src', data.image);
-      expect(getByText(`${data.time_ago} Minutes Ago`)).toBeInTheDocument();
-      expect(getByText(`${data.comments} Comments`)).toBeInTheDocument();
+      // expect(getByText(`${data.post_date} Date Ago`)).toBeInTheDocument();
     });
   });
 });

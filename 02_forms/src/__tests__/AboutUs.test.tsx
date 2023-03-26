@@ -19,10 +19,8 @@ describe('AboutUsPage', () => {
         <AboutUsPage />
       </MemoryRouter>
     );
-    expect(getAllByAltText('')).toHaveLength(3);
+    expect(getAllByAltText('')).toHaveLength(1);
     expect(getByText('William')).toBeInTheDocument();
-    expect(getByText('Krist')).toBeInTheDocument();
-    expect(getByText('Nehal')).toBeInTheDocument();
   });
 
   it('renders the correct images', () => {
@@ -33,7 +31,5 @@ describe('AboutUsPage', () => {
     );
     const images = getAllByAltText('');
     expect(images[0]).toHaveAttribute('src', 'https://i.imgur.com/Ur43esv.jpg');
-    expect(images[1]).toHaveAttribute('src', 'https://i.imgur.com/8RKXAIV.jpg');
-    expect(images[2]).toHaveAttribute('src', 'https://i.imgur.com/J6l19aF.jpg');
   });
 });

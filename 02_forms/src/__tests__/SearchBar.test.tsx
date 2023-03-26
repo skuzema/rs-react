@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
-import SearchBar from '../components/searchBar/SearchBar';
+import SearchBar from '../components/ui/searchBar/SearchBar';
 
 describe('SearchBar', () => {
   it('should render the input element', () => {

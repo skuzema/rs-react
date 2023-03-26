@@ -1,8 +1,8 @@
 import React from 'react';
-import CardList from '../../cardList/CardList';
-import PageHeader from '../../appPageHeader/PageHeader';
+import CardList from '../../ui/cardList/CardList';
+import PageHeader from '../../ui/appPageHeader/PageHeader';
 import data from '../../data/cards.json';
-import SearchBar from '../../searchBar/SearchBar';
+import SearchBar from '../../ui/searchBar/SearchBar';
 
 import './MainPage.css';
 
