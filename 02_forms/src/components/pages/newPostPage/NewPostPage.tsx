@@ -1,6 +1,6 @@
 import React from 'react';
-import PageHeader from '../../ui/appPageHeader/PageHeader';
-import AddNewPostForm from '../../ui/newPostForm/AddNewPostForm';
+import PageHeader from '../../forms/appPageHeader/PageHeader';
+import AddNewPostForm from '../../forms/newPostForm/AddNewPostForm';
 
 import './NewPostPage.css';
 

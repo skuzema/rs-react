@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import CardList from '../components/ui/cardList/CardList';
+import CardList from '../components/forms/cardList/CardList';
 
 describe('CardList component', () => {
   const testData = [
@@ -19,7 +19,7 @@ describe('CardList component', () => {
   ];
 
   it('renders card data correctly', () => {
-    const { getByText, getByAltText } = render(<CardList cardData={testData} />);
+    const { getByText, getByAltText } = render(<CardList data={testData} />);
 
     testData.forEach((data) => {
       expect(getByText(data.title)).toBeInTheDocument();

@@ -1,17 +1,16 @@
 import React from 'react';
-import CardList from '../../ui/cardList/CardList';
-import PageHeader from '../../ui/appPageHeader/PageHeader';
+import CardList from '../../forms/cardList/CardList';
+import PageHeader from '../../forms/appPageHeader/PageHeader';
+import SearchBar from '../../forms/searchBar/SearchBar';
 import data from '../../data/cards.json';
-import SearchBar from '../../ui/searchBar/SearchBar';
-
 import './MainPage.css';
 
 const MainPage = () => {
   return (
     <div>
       <PageHeader page_name="Main Page" />
-      <SearchBar />
-      <CardList cardData={data} />
+      <SearchBar label={''} />
+      <CardList data={data}/>
     </div>
   );
 };

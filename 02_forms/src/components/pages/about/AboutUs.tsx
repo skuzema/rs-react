@@ -1,5 +1,5 @@
 import React from 'react';
-import PageHeader from '../../ui/appPageHeader/PageHeader';
+import PageHeader from '../../forms/appPageHeader/PageHeader';
 
 import './AboutUs.css';
 

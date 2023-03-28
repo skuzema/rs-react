@@ -6,8 +6,12 @@ interface State {
   value: string;
 }
 
-class SearchBar extends React.Component<any, State> {
-  constructor(props: any) {
+interface Props extends React.PropsWithChildren<{}> {
+  label: string;
+}
+
+class SearchBar extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       value: localStorage.getItem('searchValue') || '',

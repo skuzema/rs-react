@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import PageHeader from '../components/ui/appPageHeader/PageHeader';
+import PageHeader from '../components/forms/appPageHeader/PageHeader';
 
 describe('PageHeader component', () => {
   const pageName = 'Test Page';

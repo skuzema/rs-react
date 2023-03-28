@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Card from '../components/ui/card/Card';
+import Card from '../components/forms/card/Card';
 
 describe('Card component', () => {
   const testData = {

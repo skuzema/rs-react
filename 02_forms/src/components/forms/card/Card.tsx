@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { CardProps } from '../../utils/CardProps';
+import { TPCard } from '../../utils/CardProps';
 import './Card.sass';
 
-class Card extends Component<CardProps> {
+class Card extends Component<TPCard> {
   getDayFromDate(date: string) {
     return new Date(date).getDate();
   }
@@ -15,9 +15,9 @@ class Card extends Component<CardProps> {
       .concat(', ', post_date.getFullYear().toString());
   }
 
-  getSource(select: number) {
+  getSource(select: string) {
     const selectOptions = ['Twitter', 'Facebook', 'Instagram'];
-    return selectOptions[select];
+    return selectOptions[parseInt(select)];
   }
 
   render() {
