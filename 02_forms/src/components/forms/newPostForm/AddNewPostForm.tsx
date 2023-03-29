@@ -19,6 +19,7 @@ const initialState = {
   check: true,
   gender: '',
   image: '',
+  img_file: undefined,
 };
 
 type TProps = { [key: string]: string };
@@ -26,6 +27,8 @@ type TState = {
   data: typeof initialState;
   errors: { [key: string]: string };
   cards: (typeof initialState)[];
+  formSubmitted: boolean;
+  timedId?: ReturnType<typeof setTimeout>;
 };
 const switchOptions = ['Male', 'Female'];
 const selectOptions = [
@@ -70,12 +73,20 @@ class AddNewPostForm extends React.Component<TProps, TState> {
     this.imageInput = React.createRef();
 
     this.maxId = 0;
-    this.state = { data: initialState, errors: {}, cards: [] };
+    this.state = { data: initialState, errors: {}, cards: [], formSubmitted: false };
   }
 
-  handleConfirm = () => {
-    alert('Article has been created!');
-  };
+  componentDidUpdate(prevProps: Readonly<TProps>, prevState: Readonly<TState>): void {
+    if (prevState.formSubmitted !== this.state.formSubmitted) {
+      this.setState({
+        timedId: setTimeout(() => this.setState({ formSubmitted: false }), 3000),
+      });
+    }
+  }
+
+  componentWillUnmount(): void {
+    clearTimeout(this.state.timedId);
+  }
 
   checkFields() {
     const Errors = Object.create(this.initialError);
@@ -159,21 +170,17 @@ class AddNewPostForm extends React.Component<TProps, TState> {
       select: this.selectInput.current?.value || '',
       check: this.checkInput.current?.checked || false,
       gender: this.switchInput.current?.checked ? 'Male' : 'Female',
-      image: this.imageInput.current?.value || '',
+      image: '',
+      img_file: this.imageInput.current?.files?.[0],
     };
 
-    if (newItem.image) {
-      const formData = new FormData();
-      formData.append('file', newItem.image);
-      // Make an API call to upload the file using formData
-    }
     if (this.checkFields()) {
-      this.setState(
-        { ...this.state, cards: [...this.state.cards, newItem], errors: Errors },
-        () => {
-          alert('Data has been saved!');
-        }
-      );
+      this.setState({
+        ...this.state,
+        cards: [...this.state.cards, newItem],
+        errors: Errors,
+        formSubmitted: true,
+      });
       this.authorInput.current ? (this.authorInput.current.value = '') : undefined;
       this.titleInput.current ? (this.titleInput.current.value = '') : undefined;
       this.postInput.current ? (this.postInput.current.value = '') : undefined;
@@ -195,12 +202,14 @@ class AddNewPostForm extends React.Component<TProps, TState> {
               name="author"
               error={this.state.errors.author}
               reference={this.authorInput}
+              accept={''}
             />
             <TextField
               label="Article title"
               name="title"
               error={this.state.errors.title}
               reference={this.titleInput}
+              accept={''}
             />
             <TextArea
               label="Article content"
@@ -216,6 +225,7 @@ class AddNewPostForm extends React.Component<TProps, TState> {
               error={this.state.errors.post_date}
               reference={this.postDateInput}
               type="date"
+              accept={''}
             />
             <SelectField
               reference={this.selectInput}
@@ -245,12 +255,14 @@ class AddNewPostForm extends React.Component<TProps, TState> {
               error={this.state.errors.image}
               reference={this.imageInput}
               type="file"
+              accept="image/gif, image/jpeg, image/png"
             />
             <div className="navbar-nav">
               <input type="submit" value="Add" />
             </div>
           </form>
         </div>
+        {this.state.formSubmitted && <div className="form-submit">Card has beet saved!</div>}
         <CardList data={this.state.cards} />
       </div>
     );

@@ -13,9 +13,7 @@ type TProps = {
 };
 
 class SelectField extends React.Component<TProps> {
-  handleChange = () => {
-    
-  };
+  handleChange = () => {};
 
   render(): React.ReactNode {
     return (
@@ -28,6 +26,7 @@ class SelectField extends React.Component<TProps> {
                 data-id={this.props.name}
                 data-name={this.props.name}
                 ref={this.props.reference}
+                className="form-select"
               >
                 <option disabled={this.props.disabledOption} value="DEFAULT" key="DEFAULT">
                   {this.props.defaultOption}

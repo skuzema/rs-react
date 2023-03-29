@@ -6,3 +6,9 @@
 	border: 0px;
 	margin: 0px;
 }
+
+.form-check {
+	font-size: medium;
+	padding: 5px;
+	margin: 5px;
+}

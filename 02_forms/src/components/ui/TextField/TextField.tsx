@@ -1,6 +1,6 @@
 import React, { RefObject } from 'react';
 
-import './TextField.css'
+import './TextField.css';
 
 type TProps = {
   label: string;
@@ -8,6 +8,7 @@ type TProps = {
   name: string;
   reference: RefObject<HTMLInputElement>;
   error: string;
+  accept: string;
 };
 
 type TState = { showPassword: boolean };
@@ -19,9 +20,8 @@ class TextField extends React.Component<TProps, TState> {
     this.state = { showPassword: false };
   }
 
-  handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    
-  };
+  handleChange = () => {};
+
   toggleShowPassword = () => {
     this.setState((prevState) => {
       !prevState.showPassword;
@@ -38,6 +38,8 @@ class TextField extends React.Component<TProps, TState> {
             data-name={this.props.name}
             onChange={this.handleChange}
             ref={this.props.reference}
+            className="form-input"
+            accept={this.props.accept}
           />
           {this.props.error && <p className="errmsg">{this.props.error}</p>}
           {this.props.type === 'password' && (

@@ -10,7 +10,7 @@ const MainPage = () => {
     <div>
       <PageHeader page_name="Main Page" />
       <SearchBar label={''} />
-      <CardList data={data}/>
+      <CardList data={data} />
     </div>
   );
 };

@@ -9,6 +9,7 @@ export interface TPArrayCard {
     check: boolean;
     gender: string;
     image: string;
+    img_file: File | undefined;
   }>;
 }
 
@@ -23,5 +24,6 @@ export interface TPCard {
     check: boolean;
     gender: string;
     image: string;
+    img_file: File | undefined;
   };
 }

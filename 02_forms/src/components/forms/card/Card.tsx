@@ -8,7 +8,7 @@ class Card extends Component<TPCard> {
   }
 
   getMonYearFromDate(date: string) {
-    let post_date = new Date(date);
+    const post_date = new Date(date);
     return post_date
       .toLocaleString('default', { month: 'long' })
       .toLocaleUpperCase()
@@ -21,11 +21,16 @@ class Card extends Component<TPCard> {
   }
 
   render() {
-    const { author, title, post, image, post_date, select, check, gender } = this.props.data;
+    const { author, title, post, image, post_date, select, check, gender, img_file } =
+      this.props.data;
     return (
       <div className="card">
         <div className="thumbnail">
-          <img className="left" src={image} alt={title} />
+          <img
+            className="left"
+            src={img_file ? URL.createObjectURL(img_file) : image}
+            alt={title}
+          />
         </div>
         <div className="right">
           <h1>{title}</h1>

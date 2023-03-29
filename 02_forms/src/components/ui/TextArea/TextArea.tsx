@@ -1,6 +1,6 @@
 import React, { RefObject } from 'react';
 
-import './TextArea.css'
+import './TextArea.css';
 
 type TProps = {
   label: string;
@@ -32,6 +32,7 @@ class TextArea extends React.Component<TProps, TState> {
             ref={this.props.reference}
             rows={this.props.rows}
             cols={this.props.cols}
+            className="form-input"
           />
           {this.props.error && <p className="errmsg">{this.props.error}</p>}
         </div>

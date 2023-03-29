@@ -6,7 +6,7 @@ interface State {
   value: string;
 }
 
-interface Props extends React.PropsWithChildren<{}> {
+interface Props extends React.PropsWithChildren {
   label: string;
 }
 
