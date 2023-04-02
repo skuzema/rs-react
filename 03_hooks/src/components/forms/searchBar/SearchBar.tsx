@@ -1,47 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './SearchBar.css';
 
-interface State {
-  value: string;
-}
+const SearchBar = () => {
+  const [store, setStore] = useState(localStorage.getItem('searchValue') || '');
 
-interface Props extends React.PropsWithChildren {
-  label: string;
-}
+  const handleChange = (store: string) => {
+    setStore(store);
+    localStorage.setItem('searchValue', store);
+  };
 
-class SearchBar extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      value: localStorage.getItem('searchValue') || '',
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentWillUnmount() {
-    localStorage.setItem('searchValue', this.state.value);
-  }
-
-  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ value: event.target.value });
-  }
-
-  render() {
-    return (
-      <div className="conatiner">
-        <div className="search-bar">
-          <input
-            type="text"
-            value={this.state.value}
-            placeholder="Search..."
-            onChange={this.handleChange}
-          />
-        </div>
+  return (
+    <div className="conatiner">
+      <div className="search-bar">
+        <input
+          type="text"
+          value={store}
+          placeholder="Search..."
+          onChange={(e) => handleChange(e.target.value)}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default SearchBar;

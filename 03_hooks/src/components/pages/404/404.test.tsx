@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Page404 from '../components/pages/404/404';
+import Page404 from './404';
 
 describe('Page404', () => {
   it('should render the 404 page', () => {

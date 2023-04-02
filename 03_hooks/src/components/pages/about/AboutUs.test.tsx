@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import AboutUsPage from '../components/pages/about/AboutUs';
+import AboutUsPage from './AboutUs';
 
 describe('AboutUsPage', () => {
   it('renders the PageHeader component with the correct page_name prop', () => {

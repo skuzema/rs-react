@@ -1,6 +1,5 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
-
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
@@ -16,8 +15,8 @@ export default defineConfig({
       provider: 'c8',
       reporter: ['text', 'json', 'html'],
       all: true,
-      include: ['src//', 'src/**'],
-      exclude: ['src/**/*.d.ts', 'src/**/*.ts'],
+      include: ['src/**/*.tsx'],
+      exclude: ['src/**/*test.tsx', 'src/**/*.ts', 'src/**/*.js'],
     },
   },
 });

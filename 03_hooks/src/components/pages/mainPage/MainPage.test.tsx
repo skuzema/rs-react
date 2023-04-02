@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom'; // import MemoryRouter
-import MainPage from '../components/pages/mainPage/MainPage';
+import MainPage from './MainPage';
 
 describe('MainPage', () => {
   it('should render PageHeader component with correct props', () => {

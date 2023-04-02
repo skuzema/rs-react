@@ -5,14 +5,14 @@ import SearchBar from '../../forms/searchBar/SearchBar';
 import data from '../../data/cards.json';
 import './MainPage.css';
 
-const MainPage = () => {
+function MainPage() {
   return (
     <div>
       <PageHeader page_name="Main Page" />
-      <SearchBar label={''} />
+      <SearchBar />
       <CardList data={data} />
     </div>
   );
-};
+}
 
 export default MainPage;

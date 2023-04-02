@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import React, { useState, RefObject } from 'react';
 
 import './TextField.css';
 
@@ -11,53 +11,37 @@ type TProps = {
   accept: string;
 };
 
-type TState = { showPassword: boolean };
-
-class TextField extends React.Component<TProps, TState> {
-  static defaultProps: { type: string };
-  constructor(props: Readonly<TProps>) {
-    super(props);
-    this.state = { showPassword: false };
-  }
-
-  handleChange = () => {};
-
-  toggleShowPassword = () => {
-    this.setState((prevState) => {
-      !prevState.showPassword;
-    });
-  };
-  render(): React.ReactNode {
-    return (
+const TextField = (props: TProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+  return (
+    <div>
+      <label data-htmlfor={props.name}>{props.label}</label>
       <div>
-        <label data-htmlfor={this.props.name}>{this.props.label}</label>
-        <div>
-          <input
-            type={this.state.showPassword ? 'text' : this.props.type}
-            data-id={this.props.name}
-            data-name={this.props.name}
-            onChange={this.handleChange}
-            ref={this.props.reference}
-            className="form-input"
-            accept={this.props.accept}
-          />
-          {this.props.error && <p className="errmsg">{this.props.error}</p>}
-          {this.props.type === 'password' && (
-            <label htmlFor="chk">
-              <input
-                type="checkbox"
-                id="chk"
-                onChange={this.toggleShowPassword}
-                checked={this.state.showPassword}
-              />
-              {'show password'}
-            </label>
-          )}
-        </div>
+        <input
+          type={showPassword ? 'text' : props.type}
+          data-id={props.name}
+          data-name={props.name}
+          ref={props.reference}
+          className="form-input"
+          accept={props.accept}
+          data-testid={props.name}
+        />
+        {props.error && <p className="errmsg">{props.error}</p>}
+        {props.type === 'password' && (
+          <label htmlFor="chk">
+            <input
+              type="checkbox"
+              id="chk"
+              onChange={() => setShowPassword(!showPassword)}
+              checked={showPassword}
+            />
+            {'show password'}
+          </label>
+        )}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 TextField.defaultProps = {
   type: 'text',
 };

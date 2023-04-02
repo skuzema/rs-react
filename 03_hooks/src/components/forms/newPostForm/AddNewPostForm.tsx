@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import CardList from '../cardList/CardList';
 import TextField from '../../ui/TextField/TextField';
@@ -6,39 +6,32 @@ import TextArea from '../../ui/TextArea/TextArea';
 import SelectField from '../../ui/SelectField/SelectField';
 import CheckBoxField from '../../ui/CheckBoxField/CheckBoxField';
 import SwitchField from '../../ui/SwitchField/SwitchField';
+import { TPCardForm } from '../../utils/CardProps';
 
 import './AddNewPostForm.css';
 
-const initialState = {
-  id: 0,
-  author: '',
-  title: '',
-  post: '',
-  post_date: '',
-  select: '',
-  check: true,
-  gender: '',
-  image: '',
-  img_file: undefined,
-};
+const AddNewPostForm = () => {
+  const switchOptions = ['Male', 'Female'];
+  const selectOptions = [
+    { label: 'Twitter', value: '0' },
+    { label: 'Facebook', value: '1' },
+    { label: 'Instagram', value: '2' },
+  ];
 
-type TProps = { [key: string]: string };
-type TState = {
-  data: typeof initialState;
-  errors: { [key: string]: string };
-  cards: (typeof initialState)[];
-  formSubmitted: boolean;
-  timedId?: ReturnType<typeof setTimeout>;
-};
-const switchOptions = ['Male', 'Female'];
-const selectOptions = [
-  { label: 'Twitter', value: '0' },
-  { label: 'Facebook', value: '1' },
-  { label: 'Instagram', value: '2' },
-];
+  const initialState: TPCardForm = {
+    id: 0,
+    author: '',
+    title: '',
+    post: '',
+    post_date: '',
+    select: '',
+    check: true,
+    gender: '',
+    image: '',
+    img_file: '',
+  };
 
-class AddNewPostForm extends React.Component<TProps, TState> {
-  initialError = {
+  const initialError = {
     author: '',
     title: '',
     post: '',
@@ -49,63 +42,44 @@ class AddNewPostForm extends React.Component<TProps, TState> {
     image: '',
   };
 
-  private maxId: number;
-  private authorInput: React.RefObject<HTMLInputElement>;
-  private titleInput: React.RefObject<HTMLInputElement>;
-  private postInput: React.RefObject<HTMLTextAreaElement>;
-  private postDateInput: React.RefObject<HTMLInputElement>;
-  private selectInput: React.RefObject<HTMLSelectElement>;
-  private checkInput: React.RefObject<HTMLInputElement>;
-  private switchInput: React.RefObject<HTMLInputElement>;
-  private imageInput: React.RefObject<HTMLInputElement>;
+  const authorInput = useRef<HTMLInputElement>(null);
+  const titleInput = useRef<HTMLInputElement>(null);
+  const postInput = useRef<HTMLTextAreaElement>(null);
+  const postDateInput = useRef<HTMLInputElement>(null);
+  const selectInput = useRef<HTMLSelectElement>(null);
+  const checkInput = useRef<HTMLInputElement>(null);
+  const switchInput = useRef<HTMLInputElement>(null);
+  const imageInput = useRef<HTMLInputElement>(null);
 
-  constructor(props: Readonly<TProps>) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  const [errors, setErrors] = useState<typeof initialError>(initialError);
+  const [cards, setCards] = useState<(typeof initialState)[]>([]);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [timedId, setTimedId] = useState<ReturnType<typeof setTimeout> | undefined>();
 
-    this.authorInput = React.createRef();
-    this.titleInput = React.createRef();
-    this.postInput = React.createRef();
-    this.postDateInput = React.createRef();
-    this.selectInput = React.createRef();
-    this.checkInput = React.createRef();
-    this.switchInput = React.createRef();
-    this.imageInput = React.createRef();
+  useEffect(() => {
+    return () => {
+      clearTimeout(timedId);
+    };
+  }, [formSubmitted, timedId]);
 
-    this.maxId = 0;
-    this.state = { data: initialState, errors: {}, cards: [], formSubmitted: false };
-  }
-
-  componentDidUpdate(prevProps: Readonly<TProps>, prevState: Readonly<TState>): void {
-    if (prevState.formSubmitted !== this.state.formSubmitted) {
-      this.setState({
-        timedId: setTimeout(() => this.setState({ formSubmitted: false }), 3000),
-      });
-    }
-  }
-
-  componentWillUnmount(): void {
-    clearTimeout(this.state.timedId);
-  }
-
-  checkFields() {
-    const Errors = Object.create(this.initialError);
+  const checkFields = () => {
+    const Errors = Object.create(initialError);
 
     let error = false;
     let error_msg = '';
 
-    this.setState({ errors: Errors });
+    setErrors(Errors);
 
     // Check author field
-    if (this.authorInput.current?.value.trim().length === 0) {
+    if (authorInput.current?.value.trim().length === 0) {
       error_msg =
         error_msg + (error_msg.length !== 0 ? ' ' : '') + "The field 'Author' should be filled!";
       error = true;
     }
     if (
       !(
-        this.authorInput.current?.value.slice(0, 1) ===
-        this.authorInput.current?.value.slice(0, 1).toUpperCase()
+        authorInput.current?.value.slice(0, 1) ===
+        authorInput.current?.value.slice(0, 1).toUpperCase()
       )
     ) {
       error_msg =
@@ -120,153 +94,150 @@ class AddNewPostForm extends React.Component<TProps, TState> {
     }
 
     // Check title
-    if (this.titleInput.current?.value.trim().length === 0) {
+    if (titleInput.current?.value.trim().length === 0) {
       Errors.title = "The field 'Title' should be filled!";
       error = true;
     }
 
     // Check content
-    if (this.postInput.current?.value.trim().length === 0) {
+    if (postInput.current?.value.trim().length === 0) {
       Errors.post = "The field 'Article content' should be filled!";
       error = true;
     }
 
     // Check date
-    if (this.postDateInput.current?.value.trim().length === 0) {
+    if (postDateInput.current?.value.trim().length === 0) {
       Errors.post_date = "The field 'Date' should be filled!";
       error = true;
     }
 
     // Check select
-    if (this.selectInput.current?.value.trim().length === 0) {
+    if (selectInput.current?.value.trim().length === 0) {
       Errors.select = "The field 'Select' should be filled!";
       error = true;
     }
 
     // Check image
-    if (this.imageInput.current?.value.trim().length === 0) {
+    if (imageInput.current?.value.trim().length === 0) {
       Errors.image = 'Please select image file!';
       error = true;
     }
 
     if (error) {
-      this.setState({ errors: Errors });
+      setErrors(Errors);
       return false;
     } else {
       return true;
     }
-  }
+  };
 
-  handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const Errors = Object.create(this.initialError);
+    const Errors = Object.create(initialError);
 
     const newItem: typeof initialState = {
-      id: this.state.cards.length + 1,
-      author: this.authorInput.current?.value || '',
-      title: this.titleInput.current?.value || '',
-      post: this.postInput.current?.value || '',
-      post_date: this.postDateInput.current?.value || '',
-      select: this.selectInput.current?.value || '',
-      check: this.checkInput.current?.checked || false,
-      gender: this.switchInput.current?.checked ? 'Male' : 'Female',
+      id: cards.length + 1,
+      author: authorInput.current?.value || '',
+      title: titleInput.current?.value || '',
+      post: postInput.current?.value || '',
+      post_date: postDateInput.current?.value || '',
+      select: selectInput.current?.value || '',
+      check: checkInput.current?.checked || false,
+      gender: switchInput.current?.checked ? 'Male' : 'Female',
       image: '',
-      img_file: this.imageInput.current?.files?.[0],
+      img_file: imageInput.current?.files?.[0] ? imageInput.current?.files?.[0] : '',
     };
 
-    if (this.checkFields()) {
-      this.setState({
-        ...this.state,
-        cards: [...this.state.cards, newItem],
-        errors: Errors,
-        formSubmitted: true,
-      });
-      this.authorInput.current ? (this.authorInput.current.value = '') : undefined;
-      this.titleInput.current ? (this.titleInput.current.value = '') : undefined;
-      this.postInput.current ? (this.postInput.current.value = '') : undefined;
-      this.postDateInput.current ? (this.postDateInput.current.value = '') : undefined;
-      this.selectInput.current ? (this.selectInput.current.value = '') : undefined;
-      this.checkInput.current ? (this.checkInput.current.checked = false) : undefined;
-      this.switchInput.current?.checked ? 'Male' : 'Female';
-      this.imageInput.current ? (this.imageInput.current.value = '') : undefined;
-    }
-  }
+    if (checkFields()) {
+      setCards([...cards, newItem]);
+      setErrors(Errors);
+      setFormSubmitted(true);
+      setTimedId(setTimeout(() => setFormSubmitted(false), 3000));
 
-  render() {
-    return (
+      authorInput.current ? (authorInput.current.value = '') : undefined;
+      titleInput.current ? (titleInput.current.value = '') : undefined;
+      postInput.current ? (postInput.current.value = '') : undefined;
+      postDateInput.current ? (postDateInput.current.value = '') : undefined;
+      selectInput.current ? (selectInput.current.value = '') : undefined;
+      checkInput.current ? (checkInput.current.checked = false) : undefined;
+      switchInput.current?.checked ? 'Male' : 'Female';
+      imageInput.current ? (imageInput.current.value = '') : undefined;
+    }
+  };
+
+  return (
+    <div>
       <div>
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <TextField
-              label="Author"
-              name="author"
-              error={this.state.errors.author}
-              reference={this.authorInput}
-              accept={''}
-            />
-            <TextField
-              label="Article title"
-              name="title"
-              error={this.state.errors.title}
-              reference={this.titleInput}
-              accept={''}
-            />
-            <TextArea
-              label="Article content"
-              name="post"
-              error={this.state.errors.post}
-              reference={this.postInput}
-              rows={5}
-              cols={100}
-            />
-            <TextField
-              label="Date"
-              name="post_date"
-              error={this.state.errors.post_date}
-              reference={this.postDateInput}
-              type="date"
-              accept={''}
-            />
-            <SelectField
-              reference={this.selectInput}
-              options={selectOptions}
-              defaultOption="choose..."
-              disabledOption
-              error={this.state.errors.select}
-              label="Select an option:"
-              name="select"
-            />
-            <CheckBoxField
-              error={this.state.errors.check}
-              label="I consent to my personal data"
-              name="check"
-              reference={this.checkInput}
-            />
-            <SwitchField
-              options={switchOptions}
-              error={this.state.errors.switch}
-              label=""
-              name="gender"
-              reference={this.switchInput}
-            />
-            <TextField
-              label="Article picture"
-              name="image"
-              error={this.state.errors.image}
-              reference={this.imageInput}
-              type="file"
-              accept="image/gif, image/jpeg, image/png"
-            />
-            <div className="navbar-nav">
-              <input type="submit" value="Add" />
-            </div>
-          </form>
-        </div>
-        {this.state.formSubmitted && <div className="form-submit">Card has beet saved!</div>}
-        <CardList data={this.state.cards} />
+        <form onSubmit={handleSubmit}>
+          <TextField
+            label="Author"
+            name="author"
+            error={errors.author}
+            reference={authorInput}
+            accept={''}
+          />
+          <TextField
+            label="Article title"
+            name="title"
+            error={errors.title}
+            reference={titleInput}
+            accept={''}
+          />
+          <TextArea
+            label="Article content"
+            name="post"
+            error={errors.post}
+            reference={postInput}
+            rows={5}
+            cols={100}
+          />
+          <TextField
+            label="Date"
+            name="post_date"
+            error={errors.post_date}
+            reference={postDateInput}
+            type="date"
+            accept={''}
+          />
+          <SelectField
+            reference={selectInput}
+            options={selectOptions}
+            defaultOption="choose..."
+            disabledOption
+            error={errors.select}
+            label="Select an option:"
+            name="select"
+          />
+          <CheckBoxField
+            error={errors.check}
+            label="I consent to my personal data"
+            name="check"
+            reference={checkInput}
+          />
+          <SwitchField
+            options={switchOptions}
+            error={errors?.gender}
+            label=""
+            name="gender"
+            reference={switchInput}
+          />
+          <TextField
+            label="Article picture"
+            name="image"
+            error={errors.image}
+            reference={imageInput}
+            type="file"
+            accept="image/gif, image/jpeg, image/png"
+          />
+          <div className="navbar-nav">
+            <input type="submit" value="Add" />
+          </div>
+        </form>
       </div>
-    );
-  }
-}
+      {formSubmitted && <div className="form-submit">Card has been saved!</div>}
+      <CardList data={cards} />
+    </div>
+  );
+};
 
 export default AddNewPostForm;

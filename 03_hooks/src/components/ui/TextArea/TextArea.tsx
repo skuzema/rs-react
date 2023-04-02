@@ -12,33 +12,24 @@ type TProps = {
   cols: number;
 };
 
-type TState = { showPassword: boolean };
-
-class TextArea extends React.Component<TProps, TState> {
-  static defaultProps: { type: string };
-  constructor(props: Readonly<TProps>) {
-    super(props);
-    this.state = { showPassword: false };
-  }
-
-  render(): React.ReactNode {
-    return (
+const TextArea = (props: TProps) => {
+  return (
+    <div>
+      <label data-htmlfor={props.name}>{props.label}</label>
       <div>
-        <label data-htmlfor={this.props.name}>{this.props.label}</label>
-        <div>
-          <textarea
-            data-id={this.props.name}
-            data-name={this.props.name}
-            ref={this.props.reference}
-            rows={this.props.rows}
-            cols={this.props.cols}
-            className="form-input"
-          />
-          {this.props.error && <p className="errmsg">{this.props.error}</p>}
-        </div>
+        <textarea
+          data-id={props.name}
+          data-name={props.name}
+          data-testid={props.name}
+          ref={props.reference}
+          rows={props.rows}
+          cols={props.cols}
+          className="form-input"
+        />
+        {props.error && <p className="errmsg">{props.error}</p>}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default TextArea;

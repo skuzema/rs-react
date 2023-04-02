@@ -12,39 +12,36 @@ type TProps = {
   disabledOption: boolean;
 };
 
-class SelectField extends React.Component<TProps> {
-  handleChange = () => {};
-
-  render(): React.ReactNode {
-    return (
+const SelectField = (props: TProps) => {
+  return (
+    <div>
+      <label data-htmlfor={props.name}>{props.label}</label>
       <div>
-        <label data-htmlfor={this.props.name}>{this.props.label}</label>
-        <div>
-          {
-            <>
-              <select
-                data-id={this.props.name}
-                data-name={this.props.name}
-                ref={this.props.reference}
-                className="form-select"
-              >
-                <option disabled={this.props.disabledOption} value="DEFAULT" key="DEFAULT">
-                  {this.props.defaultOption}
-                </option>
-                {this.props.options &&
-                  this.props.options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-              </select>
-              <span />
-            </>
-          }
-        </div>
-        {this.props.error && <p className="errmsg">{this.props.error}</p>}
+        {
+          <>
+            <select
+              data-id={props.name}
+              data-name={props.name}
+              data-testid={props.name}
+              ref={props.reference}
+              className="form-select"
+            >
+              <option disabled={props.disabledOption} value="DEFAULT" key="DEFAULT">
+                {props.defaultOption}
+              </option>
+              {props.options &&
+                props.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+            </select>
+            <span />
+          </>
+        }
       </div>
-    );
-  }
-}
+      {props.error && <p className="errmsg">{props.error}</p>}
+    </div>
+  );
+};
 export default SelectField;
