@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './SearchBar.css';
 
@@ -7,8 +7,11 @@ const SearchBar = () => {
 
   const handleChange = (store: string) => {
     setStore(store);
-    localStorage.setItem('searchValue', store);
   };
+
+  useEffect(() => {
+    localStorage.setItem('searchValue', store);
+  });
 
   return (
     <div className="conatiner">
