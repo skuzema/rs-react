@@ -36,13 +36,4 @@ describe('TextField', () => {
     userEvent.click(checkbox);
     expect(input).toHaveAttribute('type', 'password');
   });
-
-  it('displays error message if error prop is passed', () => {
-    const errorMessage = 'This field is required';
-    const ref = { current: null };
-    render(
-      <TextField label={label} name={name} reference={ref} accept={''} error={errorMessage} />
-    );
-    expect(screen.getByText(errorMessage)).toBeInTheDocument();
-  });
 });

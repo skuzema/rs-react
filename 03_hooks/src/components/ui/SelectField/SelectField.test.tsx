@@ -1,43 +1,63 @@
-import React, { createRef, RefObject } from 'react';
-import { render } from '@testing-library/react';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import SelectField from './SelectField';
-
-type TProps = {
-  label: string;
-  name: string;
-  defaultOption: string;
-  options: { label: string; value: string }[];
-  error: string;
-  reference: RefObject<HTMLSelectElement>;
-  disabledOption: boolean;
-};
+import { useForm } from 'react-hook-form';
+import { TPCardForm } from '../../utils/CardProps';
 
 describe('SelectField', () => {
-  const defaultProps: TProps = {
-    label: 'Select an option',
-    name: 'selectField',
-    defaultOption: 'Choose an option',
-    options: [
-      { label: 'Option 1', value: '1' },
-      { label: 'Option 2', value: '2' },
-      { label: 'Option 3', value: '3' },
-    ],
-    error: '',
-    reference: createRef<HTMLSelectElement>(),
-    disabledOption: true,
+  const options = [
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+  ];
+  const label = 'Select an option';
+  const name = 'selectField';
+  const defaultOption = 'Please select an option';
+  const disabledOption = true;
+  const error = undefined;
+
+  const Wrapper = () => {
+    const { register } = useForm<TPCardForm>();
+    return (
+      <SelectField
+        label={label}
+        name={name}
+        defaultOption={defaultOption}
+        options={options}
+        disabledOption={disabledOption}
+        register={register}
+        error={error}
+      />
+    );
   };
 
-  it('displays error message if error prop is passed', () => {
-    const errorMessage = 'Please select an option';
-    const { getByText } = render(<SelectField {...defaultProps} error={errorMessage} />);
-    const errorElement = getByText(errorMessage);
-    expect(errorElement).toBeInTheDocument();
+  it('should render SelectField component', () => {
+    render(<Wrapper />);
+    expect(screen.getByTestId('selectField')).toBeInTheDocument();
   });
 
-  it('sets the reference correctly', () => {
-    const reference = createRef<HTMLSelectElement>();
-    render(<SelectField {...defaultProps} reference={reference} />);
-    expect(defaultProps.reference.current).toBeNull();
-    expect(reference.current).not.toBeNull();
+  it('should render default option', () => {
+    render(<Wrapper />);
+    expect(screen.getByText(defaultOption)).toBeInTheDocument();
+  });
+
+  it('should render all options', () => {
+    render(<Wrapper />);
+    options.forEach((option) => {
+      expect(screen.getByText(option.label)).toBeInTheDocument();
+    });
+  });
+
+  it('should select an option', () => {
+    render(<Wrapper />);
+    const option = screen.getByText(options[0].label);
+    userEvent.selectOptions(screen.getByTestId('selectField'), option);
+    expect(option.selected).toBeTruthy();
+  });
+
+  it('should not select disabled option', () => {
+    render(<Wrapper />);
+    const disabledOption = screen.getByText(defaultOption);
+    expect(disabledOption.disabled).toBeTruthy();
   });
 });

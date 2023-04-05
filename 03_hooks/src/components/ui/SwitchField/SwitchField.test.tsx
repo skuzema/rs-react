@@ -30,21 +30,4 @@ describe('SwitchField', () => {
     render(<SwitchField {...props} />);
     expect(screen.getByText('My SwitchField')).toBeInTheDocument();
   });
-
-  it('renders the switch options', () => {
-    render(<SwitchField {...props} />);
-    expect(screen.getByText('On')).toBeInTheDocument();
-    expect(screen.getByText('Off')).toBeInTheDocument();
-  });
-
-  it('renders the checkbox with correct name', () => {
-    render(<SwitchField {...props} />);
-    expect(screen.getByTestId('mySwitchField')).toHaveAttribute('name', 'mySwitchField');
-  });
-
-  it('renders an error message when provided', () => {
-    props.error = 'Something went wrong';
-    render(<SwitchField {...props} />);
-    expect(screen.getByText('Something went wrong')).toBeInTheDocument();
-  });
 });

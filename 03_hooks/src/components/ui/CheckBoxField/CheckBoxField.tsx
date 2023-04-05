@@ -1,13 +1,15 @@
-import React, { useState, RefObject } from 'react';
+import React, { useState } from 'react';
+import { FieldError, UseFormRegister } from 'react-hook-form';
 
+import { TPCardForm } from '../../utils/CardProps';
 import './CheckBoxField.css';
 
 type TProps = {
   label: string;
   type?: string;
   name: string;
-  reference: RefObject<HTMLInputElement>;
-  error: string;
+  register: ReturnType<UseFormRegister<TPCardForm>>;
+  error: FieldError | undefined;
 };
 
 const CheckBoxField = (props: TProps) => {
@@ -23,12 +25,12 @@ const CheckBoxField = (props: TProps) => {
         data-id={props.name}
         data-testid={props.name}
         defaultChecked={isChecked}
-        ref={props.reference}
+        {...props.register}
       />
       <label className="form-check-label" data-htmlfor={props.name}>
         {props.label}
       </label>
-      {props.error && <div className="invalid-feedback">{props.error}</div>}
+      {props.error && <div className="errmsg">{props.error.message}</div>}
     </div>
   );
 };

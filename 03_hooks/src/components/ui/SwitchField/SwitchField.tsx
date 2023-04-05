@@ -1,13 +1,15 @@
-import React, { RefObject } from 'react';
+import React from 'react';
+import { FieldError, UseFormRegister } from 'react-hook-form';
 
+import { TPCardForm } from '../../utils/CardProps';
 import './SwitchField.scss';
 
 type TProps = {
   label: string;
   type?: string;
   name: string;
-  reference: RefObject<HTMLInputElement>;
-  error: string;
+  register: ReturnType<UseFormRegister<TPCardForm>>;
+  error: FieldError | undefined;
   options: string[];
 };
 
@@ -18,8 +20,8 @@ const SwitchField = (props: TProps) => {
       <input
         className="checkbox"
         type="checkbox"
-        name={props.name}
-        ref={props.reference}
+        data-name={props.name}
+        {...props.register}
         data-testid={props.name}
       />
       <span>{props.options[1]}</span>
@@ -28,7 +30,7 @@ const SwitchField = (props: TProps) => {
           {props.label}
         </label>
       )}
-      {props.error && <div className="invalid-feedback">{props.error}</div>}
+      {props.error && <div className="invalid-feedback">{props.error.message}</div>}
     </div>
   );
 };

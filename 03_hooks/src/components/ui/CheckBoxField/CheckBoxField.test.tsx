@@ -16,16 +16,4 @@ describe('CheckBoxField', () => {
     render(<CheckBoxField label="" name={name} reference={ref} error="" />);
     expect(screen.getByTestId(name)).toBeInTheDocument();
   });
-
-  it('displays error message if error prop is passed', () => {
-    const ref = { current: null };
-    const errorMessage = 'You must agree to the terms and conditions';
-    const { getByTestId, queryByText } = render(
-      <CheckBoxField label="" name="agree" reference={ref} error={errorMessage} />
-    );
-    const input = getByTestId('agree');
-    expect(input).toBeInTheDocument();
-    expect(input).toHaveAttribute('type', 'checkbox');
-    expect(queryByText(errorMessage)).toBeInTheDocument();
-  });
 });

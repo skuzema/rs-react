@@ -1,5 +1,7 @@
-import React, { RefObject } from 'react';
+import React from 'react';
+import { FieldError, UseFormRegister } from 'react-hook-form';
 
+import { TPCardForm } from '../../utils/CardProps';
 import './SelectField.css';
 
 type TProps = {
@@ -7,9 +9,9 @@ type TProps = {
   name: string;
   defaultOption: string;
   options: { label: string; value: string }[];
-  error: string;
-  reference: RefObject<HTMLSelectElement>;
   disabledOption: boolean;
+  register: ReturnType<UseFormRegister<TPCardForm>>;
+  error: FieldError | undefined;
 };
 
 const SelectField = (props: TProps) => {
@@ -23,7 +25,7 @@ const SelectField = (props: TProps) => {
               data-id={props.name}
               data-name={props.name}
               data-testid={props.name}
-              ref={props.reference}
+              {...props.register}
               className="form-select"
             >
               <option disabled={props.disabledOption} value="DEFAULT" key="DEFAULT">
@@ -40,7 +42,7 @@ const SelectField = (props: TProps) => {
           </>
         }
       </div>
-      {props.error && <p className="errmsg">{props.error}</p>}
+      {props.error && <p className="errmsg">{props.error.message}</p>}
     </div>
   );
 };

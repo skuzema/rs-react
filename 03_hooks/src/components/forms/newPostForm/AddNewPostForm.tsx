@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 import CardList from '../cardList/CardList';
 import TextField from '../../ui/TextField/TextField';
@@ -10,7 +11,30 @@ import { TPCardForm } from '../../utils/CardProps';
 
 import './AddNewPostForm.css';
 
+const ACTUAL__DATE = new Date();
+const TEXT__REGEXP = new RegExp(/[A-Za-z]{3,}/);
+
+const initialState: TPCardForm = {
+  id: 0,
+  author: '',
+  title: '',
+  post: '',
+  post_date: '',
+  select: '',
+  check: true,
+  gender: '',
+  image: '',
+  img_file: '',
+};
+
 const AddNewPostForm = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<TPCardForm>({ mode: 'onSubmit' });
+
   const switchOptions = ['Male', 'Female'];
   const selectOptions = [
     { label: 'Twitter', value: '0' },
@@ -18,40 +42,6 @@ const AddNewPostForm = () => {
     { label: 'Instagram', value: '2' },
   ];
 
-  const initialState: TPCardForm = {
-    id: 0,
-    author: '',
-    title: '',
-    post: '',
-    post_date: '',
-    select: '',
-    check: true,
-    gender: '',
-    image: '',
-    img_file: '',
-  };
-
-  const initialError = {
-    author: '',
-    title: '',
-    post: '',
-    post_date: '',
-    select: '',
-    check: '',
-    gender: '',
-    image: '',
-  };
-
-  const authorInput = useRef<HTMLInputElement>(null);
-  const titleInput = useRef<HTMLInputElement>(null);
-  const postInput = useRef<HTMLTextAreaElement>(null);
-  const postDateInput = useRef<HTMLInputElement>(null);
-  const selectInput = useRef<HTMLSelectElement>(null);
-  const checkInput = useRef<HTMLInputElement>(null);
-  const switchInput = useRef<HTMLInputElement>(null);
-  const imageInput = useRef<HTMLInputElement>(null);
-
-  const [errors, setErrors] = useState<typeof initialError>(initialError);
   const [cards, setCards] = useState<(typeof initialState)[]>([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [timedId, setTimedId] = useState<ReturnType<typeof setTimeout> | undefined>();
@@ -62,172 +52,122 @@ const AddNewPostForm = () => {
     };
   }, [formSubmitted, timedId]);
 
-  const checkFields = () => {
-    const Errors = Object.create(initialError);
-
-    let error = false;
-    let error_msg = '';
-
-    setErrors(Errors);
-
-    // Check author field
-    if (authorInput.current?.value.trim().length === 0) {
-      error_msg =
-        error_msg + (error_msg.length !== 0 ? ' ' : '') + "The field 'Author' should be filled!";
-      error = true;
-    }
-    if (
-      !(
-        authorInput.current?.value.slice(0, 1) ===
-        authorInput.current?.value.slice(0, 1).toUpperCase()
-      )
-    ) {
-      error_msg =
-        error_msg +
-        (error_msg.length !== 0 ? ' ' : '') +
-        'Author Name should start with uppercase!';
-      error = true;
-    }
-
-    if (error_msg.length > 0) {
-      Errors.author = error_msg;
-    }
-
-    // Check title
-    if (titleInput.current?.value.trim().length === 0) {
-      Errors.title = "The field 'Title' should be filled!";
-      error = true;
-    }
-
-    // Check content
-    if (postInput.current?.value.trim().length === 0) {
-      Errors.post = "The field 'Article content' should be filled!";
-      error = true;
-    }
-
-    // Check date
-    if (postDateInput.current?.value.trim().length === 0) {
-      Errors.post_date = "The field 'Date' should be filled!";
-      error = true;
-    }
-
-    // Check select
-    if (selectInput.current?.value.trim().length === 0) {
-      Errors.select = "The field 'Select' should be filled!";
-      error = true;
-    }
-
-    // Check image
-    if (imageInput.current?.value.trim().length === 0) {
-      Errors.image = 'Please select image file!';
-      error = true;
-    }
-
-    if (error) {
-      setErrors(Errors);
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const Errors = Object.create(initialError);
-
+  const onFormSubmit = (data: TPCardForm) => {
     const newItem: typeof initialState = {
       id: cards.length + 1,
-      author: authorInput.current?.value || '',
-      title: titleInput.current?.value || '',
-      post: postInput.current?.value || '',
-      post_date: postDateInput.current?.value || '',
-      select: selectInput.current?.value || '',
-      check: checkInput.current?.checked || false,
-      gender: switchInput.current?.checked ? 'Male' : 'Female',
+      author: data.author,
+      title: data.title,
+      post: data.post,
+      post_date: data.post_date,
+      select: data.select,
+      check: data.check,
+      gender: data.gender ? 'Female' : 'Male',
+      img_file: data.img_file[0],
       image: '',
-      img_file: imageInput.current?.files?.[0] ? imageInput.current?.files?.[0] : '',
     };
 
-    if (checkFields()) {
-      setCards([...cards, newItem]);
-      setErrors(Errors);
-      setFormSubmitted(true);
-      setTimedId(setTimeout(() => setFormSubmitted(false), 3000));
-
-      authorInput.current ? (authorInput.current.value = '') : undefined;
-      titleInput.current ? (titleInput.current.value = '') : undefined;
-      postInput.current ? (postInput.current.value = '') : undefined;
-      postDateInput.current ? (postDateInput.current.value = '') : undefined;
-      selectInput.current ? (selectInput.current.value = '') : undefined;
-      checkInput.current ? (checkInput.current.checked = false) : undefined;
-      switchInput.current?.checked ? 'Male' : 'Female';
-      imageInput.current ? (imageInput.current.value = '') : undefined;
-    }
+    setFormSubmitted(true);
+    setCards([...cards, newItem]);
+    setTimedId(setTimeout(() => setFormSubmitted(false), 3000));
+    reset();
   };
 
   return (
     <div>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onFormSubmit)}>
           <TextField
             label="Author"
             name="author"
             error={errors.author}
-            reference={authorInput}
-            accept={''}
+            register={{
+              ...register('author', {
+                required: 'The field "Author" should be filled!',
+                pattern: { value: TEXT__REGEXP, message: 'Enter letters' },
+                minLength: { value: 3, message: 'Enter 3 or more characters' },
+              }),
+            }}
           />
           <TextField
             label="Article title"
             name="title"
             error={errors.title}
-            reference={titleInput}
-            accept={''}
+            register={{
+              ...register('title', {
+                required: 'The field "Title" should be filled!',
+                pattern: { value: TEXT__REGEXP, message: 'Enter letters' },
+                minLength: { value: 3, message: 'Enter 3 or more characters' },
+              }),
+            }}
           />
           <TextArea
             label="Article content"
             name="post"
             error={errors.post}
-            reference={postInput}
             rows={5}
             cols={100}
+            register={{
+              ...register('post', {
+                required: 'The field "Article content" should be filled!',
+              }),
+            }}
           />
           <TextField
             label="Date"
             name="post_date"
             error={errors.post_date}
-            reference={postDateInput}
             type="date"
-            accept={''}
+            register={{
+              ...register('post_date', {
+                required: 'The field "Date" should be filled!',
+                validate: (date) =>
+                  new Date(date) < ACTUAL__DATE || `Date should not be in future!`,
+              }),
+            }}
           />
           <SelectField
-            reference={selectInput}
             options={selectOptions}
             defaultOption="choose..."
             disabledOption
             error={errors.select}
             label="Select an option:"
             name="select"
+            register={{
+              ...register('select', {
+                required: 'The field "Select" should be filled!',
+              }),
+            }}
           />
           <CheckBoxField
             error={errors.check}
             label="I consent to my personal data"
             name="check"
-            reference={checkInput}
+            register={{
+              ...register('check', {
+                required: 'Please check the box!',
+              }),
+            }}
           />
           <SwitchField
             options={switchOptions}
-            error={errors?.gender}
+            error={errors.gender}
             label=""
             name="gender"
-            reference={switchInput}
+            register={{
+              ...register('gender'),
+            }}
           />
           <TextField
             label="Article picture"
-            name="image"
-            error={errors.image}
-            reference={imageInput}
+            name="img_file"
+            error={errors.img_file}
             type="file"
             accept="image/gif, image/jpeg, image/png"
+            register={{
+              ...register('img_file', {
+                required: 'Please select image file!',
+              }),
+            }}
           />
           <div className="navbar-nav">
             <input type="submit" value="Add" />

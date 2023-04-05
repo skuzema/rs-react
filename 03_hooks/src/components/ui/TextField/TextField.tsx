@@ -1,14 +1,16 @@
-import React, { useState, RefObject } from 'react';
+import React, { useState } from 'react';
+import { FieldError, UseFormRegister } from 'react-hook-form';
 
+import { TPCardForm } from '../../utils/CardProps';
 import './TextField.css';
 
 type TProps = {
   label: string;
   type?: string;
   name: string;
-  reference: RefObject<HTMLInputElement>;
-  error: string;
-  accept: string;
+  register: ReturnType<UseFormRegister<TPCardForm>>;
+  error: FieldError | undefined;
+  accept?: string;
 };
 
 const TextField = (props: TProps) => {
@@ -21,12 +23,12 @@ const TextField = (props: TProps) => {
           type={showPassword ? 'text' : props.type}
           data-id={props.name}
           data-name={props.name}
-          ref={props.reference}
+          {...props.register}
           className="form-input"
-          accept={props.accept}
           data-testid={props.name}
+          accept={props.accept}
         />
-        {props.error && <p className="errmsg">{props.error}</p>}
+        {props.error && <p className="errmsg">{props.error.message}</p>}
         {props.type === 'password' && (
           <label htmlFor="chk">
             <input
