@@ -7,7 +7,7 @@ import TextArea from '../../ui/TextArea/TextArea';
 import SelectField from '../../ui/SelectField/SelectField';
 import CheckBoxField from '../../ui/CheckBoxField/CheckBoxField';
 import SwitchField from '../../ui/SwitchField/SwitchField';
-import { TPCardForm } from '../../utils/CardProps';
+import { TPCardForm } from '../../utils/interfaces';
 
 import './AddNewPostForm.css';
 

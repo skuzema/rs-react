@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import './PageHeader.css';
+import './PageHeader.scss';
 
 interface PageProps {
   page_name: string;
@@ -14,13 +14,19 @@ function PageHeader(props: PageProps) {
       <h2>{page_name}</h2>
       <ul className="navbar-nav">
         <li className="nav-item">
-          <NavLink to="/">Home</NavLink>
+          <NavLink className="button" to="/">
+            Home
+          </NavLink>
         </li>
+        {/* <li className="nav-item">
+          <NavLink className="button" to="/new">
+            Form
+          </NavLink>
+        </li> */}
         <li className="nav-item">
-          <NavLink to="/new">Form</NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink to="/about">About</NavLink>
+          <NavLink className="button" to="/about">
+            About
+          </NavLink>
         </li>
       </ul>
     </div>

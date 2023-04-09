@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FieldError, UseFormRegister } from 'react-hook-form';
 
-import { TPCardForm } from '../../utils/CardProps';
+import { TPCardForm } from '../../utils/interfaces';
 import './CheckBoxField.css';
 
 type TProps = {

@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SelectField from './SelectField';
 import { useForm } from 'react-hook-form';
-import { TPCardForm } from '../../utils/CardProps';
+import { TPCardForm } from '../../utils/interfaces';
 
 describe('SelectField', () => {
   const options = [

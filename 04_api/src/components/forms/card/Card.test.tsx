@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Card from './Card';
-import { TPCardForm } from '../../utils/CardProps';
+import { TPCardForm } from '../../utils/interfaces';
 
 describe('Card component', () => {
   const testData: TPCardForm = {

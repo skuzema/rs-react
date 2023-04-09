@@ -1,4 +1,4 @@
-import { TPArrayCard, TPCard, TPCardForm } from './CardProps';
+import { TPArrayCard, TPCard, TPCardForm } from './interfaces';
 
 describe('Types for card data', () => {
   test('TPArrayCard interface has data property of type Array<TPCardForm>', () => {

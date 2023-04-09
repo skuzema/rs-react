@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './404.css';
+import './404.scss';
 
 const Page404 = () => {
   return (
@@ -16,7 +16,9 @@ const Page404 = () => {
             The page you are looking for might have been removed had its name changed or is
             temporarily unavailable.
           </p>
-          <Link to="/">Back To Homepage</Link>
+          <Link className="button" to="/">
+            Back To Homepage
+          </Link>
         </div>
       </div>
     </div>
