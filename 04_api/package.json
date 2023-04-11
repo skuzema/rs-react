@@ -1,5 +1,5 @@
 {
-  "name": "03_forms",
+  "name": "04_api",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -25,7 +25,6 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
-    "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",

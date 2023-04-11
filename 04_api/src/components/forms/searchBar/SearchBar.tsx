@@ -13,7 +13,7 @@ const SearchBar = (props) => {
     sources: '',
     sort: 'publishedAt',
     page: '1',
-    page_size: '10',
+    page_size: '100',
   };
 
   const [params, setParams] = useState(
