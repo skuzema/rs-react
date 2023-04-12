@@ -1,0 +1,23 @@
+@import '../../../style/variables.scss';
+
+.message {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  line-height: 1.4;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+}
+
+.message h2 {
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 30px;
+  color: $text-not-found;
+  background-color: $background-main;
+  font-weight: 100;
+	margin-top: 10%;
+	margin-bottom: 10%;
+}
