@@ -1,0 +1,23 @@
+@import '../../../style/variables.scss';
+
+.errmsg {
+	color: #c12020;
+	font-weight: bold;
+	font-size: small;
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+}
+
+.form-input {
+	font-size: large;
+	padding: 3px;
+	margin: 0px 0px 10px 0px;
+	color: $text-black;
+	background-color: aliceblue;
+}
+
+label {
+	color: $text-color;
+	font-size: large;
+}

@@ -1,0 +1,10 @@
+.wrap-form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  line-height: 1.4;
+  padding: 10px 10px;
+  align-items: center;
+}
