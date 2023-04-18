@@ -40,6 +40,10 @@ export interface Article {
   content: string;
 }
 
+export interface TPArticle {
+  data: Article;
+}
+
 export interface Source {
   id: string;
   name: string;

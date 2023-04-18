@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import ModalForm from '../modalForm/ModalForm';
 
+import { TPArticle } from '../../../models/IArticles';
+
 import './Card.scss';
 import not_available from './not_available.jpg';
 
-function Card(props) {
+function Card(props: TPArticle) {
   const [showModal, setShowModal] = useState(false);
 
   const getFromatedDate = (date: string) => {
