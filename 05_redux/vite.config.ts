@@ -12,11 +12,7 @@ export default defineConfig({
     setupFiles: './src/__tests__/setup.ts',
     css: true,
     coverage: {
-      provider: 'c8',
       reporter: ['text', 'json', 'html'],
-      all: true,
-      include: ['src/**/*.tsx'],
-      exclude: ['src/**/*test.tsx', 'src/**/*.js'],
     },
   },
 });

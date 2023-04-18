@@ -23,10 +23,10 @@ describe('ModalForm', () => {
       <ModalForm showModal={true} data={mockData} onModalFormClose={onClose} />
     );
 
-    expect(getByText(mockData.title)).toBeInTheDocument();
-    expect(getByAltText(mockData.title)).toBeInTheDocument();
-    expect(getByText(mockData.description)).toBeInTheDocument();
-    expect(getByText(mockData.content)).toBeInTheDocument();
+    expect(getByText(mockData.data.title)).toBeInTheDocument();
+    expect(getByAltText(mockData.data.title)).toBeInTheDocument();
+    expect(getByText(mockData.data.description)).toBeInTheDocument();
+    expect(getByText(mockData.data.content)).toBeInTheDocument();
     expect(getByText('Open full article in new tab')).toBeInTheDocument();
 
     const closeButton = getByText('x');

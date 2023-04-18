@@ -1,18 +1,27 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
 import SearchBar from './SearchBar';
 
-describe('SearchBar', () => {
-  it('should render the input element', () => {
-    render(<SearchBar />);
-    const inputElement = screen.getByPlaceholderText('Search...');
-    expect(inputElement).toBeInTheDocument();
-  });
+const mockStore = configureMockStore();
 
-  it('should update the state when input value changes', () => {
-    render(<SearchBar />);
-    const inputElement = screen.getByPlaceholderText('Search...') as HTMLInputElement;
-    fireEvent.change(inputElement, { target: { value: 'test' } });
-    expect(inputElement.value).toBe('test');
+describe('SearchBar', () => {
+  it('renders a search bar', () => {
+    const store = mockStore({
+      queryParam: {
+        q: 'test',
+      },
+    });
+
+    render(
+      <Provider store={store}>
+        <SearchBar />
+      </Provider>
+    );
+
+    const searchInput = screen.getByPlaceholderText('Title');
+    expect(searchInput).toBeInTheDocument();
+    expect(searchInput.value).toBe('test');
   });
 });

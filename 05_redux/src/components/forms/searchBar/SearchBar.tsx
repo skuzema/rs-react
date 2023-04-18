@@ -11,7 +11,7 @@ import { setQueryParam } from '../../../store/reducers/queryParamSlice';
 const SearchBar = () => {
   const { register, handleSubmit } = useForm<SearchParams>({ mode: 'onSubmit' });
   const dispatch = useAppDispatch();
-  const qry = useAppSelector((state) => state.queryParam.q);
+  const searchValue = useAppSelector((state) => state.queryParam.q);
 
   const onFormSubmit = (par: SearchParams) => {
     dispatch(
@@ -23,7 +23,12 @@ const SearchBar = () => {
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} className="search-conatiner">
-      <input {...register('q')} className="search-bar" placeholder="Title" defaultValue={qry} />
+      <input
+        {...register('q')}
+        className="search-bar"
+        placeholder="Title"
+        defaultValue={searchValue}
+      />
       <input type="submit" className="btn-search" value="Search" />
     </form>
   );
