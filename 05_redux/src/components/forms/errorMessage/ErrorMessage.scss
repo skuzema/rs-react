@@ -1,0 +1,23 @@
+@import '../../../style/variables.scss';
+
+.error {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  line-height: 1.4;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.error h2 {
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 25px;
+  color: $text-red;
+  background-color: $background-main;
+  font-weight: 100;
+  margin-top: 10px;
+}

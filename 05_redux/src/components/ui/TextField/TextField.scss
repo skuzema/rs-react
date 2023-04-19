@@ -1,0 +1,33 @@
+@import '../../../style/variables.scss';
+
+.errmsg {
+  color: $text-red;
+  background: $background-main;
+  font-weight: bold;
+  font-size: small;
+  padding: 0px;
+  border: 0px;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  font-size: large;
+  padding: 10px;
+  margin: 0px 0px 20px 0px;
+  color: $text-black;
+}
+
+label {
+  color: $text-color;
+  font-size: large;
+}
+
+input[type='text' i] {
+  background: $background-card;
+  width: 100%;
+  color: $text-black;
+  border-style: none;
+  font-size: large;
+  padding: 10px;
+  margin: 0px 0px 10px 0px;
+}
