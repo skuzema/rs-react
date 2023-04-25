@@ -1,0 +1,38 @@
+@import '../../../style/variables.scss';
+@import '../../../style/button.scss';
+
+.nb-nav-post {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.nb-nav-post > .nav-item {
+  font-size: 14px;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-weight: 400;
+  position: relative;
+  list-style-type: none;
+}
+
+.nb-nav-post .nav-link {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.form-submit-post {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  padding: 16px 38px;
+  background-color: #fff;
+  border-color: #fff;
+  color: #eb0d0d;
+  font-size: large;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

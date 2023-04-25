@@ -1,0 +1,143 @@
+@import '../../../style/variables.scss';
+
+.modal {
+  font-family: arial;
+  background-color: $background-card;
+}
+
+.modal {
+  position: fixed;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: start;
+  width: 40%;
+  height: 60%;
+  z-index: 1040;
+  top: 20%;
+  left: 30%;
+  background-color: $background-card;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.backdrop {
+  position: fixed;
+  z-index: 1040;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.modal-title {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  font-weight: 500;
+  font-size: 1.25rem;
+  background-color: $btn-normal;
+}
+
+.modal-header {
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  background-color: $btn-normal;
+}
+
+.modal-header,
+.modal-footer {
+  padding: 12px;
+}
+
+.modal-ref {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: $background-card;
+  padding: 0px;
+}
+
+.modal-separator {
+  margin-top: 4px;
+  border: 1px solid $text-not-found;
+  width: 100%;
+  border-radius: 15%;
+}
+
+.modal-src {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  background-color: $background-card;
+  margin-left: 5px;
+}
+
+.modal-src div {
+  background-color: $background-card;
+  padding-bottom: 3px;
+  font-size: 1.2rem;
+  span {
+    margin-right: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: $background-card;
+  }
+}
+
+.modal-desc {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  background-color: $background-card;
+  padding: 12px;
+}
+
+.close-button {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  border: none;
+  background-color: $btn-normal;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 10px 12px;
+  border-radius: 5px;
+  border: none;
+}
+
+.modal-footer {
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  background-color: $background-card;
+}
+
+.secondary-button {
+  color: black;
+  background-color: $background-card;
+}
+
+.primary-button {
+  color: black;
+  background-color: $background-card;
+}
+
+.modal-example {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

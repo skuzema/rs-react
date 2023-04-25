@@ -1,0 +1,107 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import '../../../style/variables.scss';
+
+/* The card */
+.card {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 2%;
+  height: $card-height;
+  width: 80%;
+  margin: 20px;
+  background-color: $background-card;
+  transition: 0.4s ease-out;
+  box-shadow: 0px 7px 10px rgba(black, 0.5);
+  &:hover {
+    transform: translateY(10px);
+    .info {
+      opacity: 0.7;
+      transform: translateY(0px);
+    }
+  }
+
+  .info {
+    height: $card-height;
+    position: relative;
+    z-index: 3;
+    color: $text-color;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.5s;
+  }
+}
+
+/* Image on the left side */
+.image {
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
+}
+
+/* Right side of the card */
+.right {
+  background-color: $background-card;
+}
+
+h3 {
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  text-align: left;
+  font-size: 1.3rem;
+  color: $text-black;
+  background-color: $background-card;
+}
+
+.author {
+  height: 30px;
+  width: 110px;
+  border-radius: 20px;
+}
+
+.separator {
+  margin-top: 4px;
+  border: 3px solid $text-more;
+  width: 7%;
+  border-radius: 15%;
+}
+
+p {
+  margin-top: 4px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  text-align: justify;
+  font-size: 0.95rem;
+  line-height: 150%;
+  color: $text-black;
+  background-color: $background-card;
+}
+
+/* DATE of release*/
+.date {
+  position: relative;
+  left: 5px;
+  top: 5px;
+  font-size: 0.8rem;
+  color: $text-color;
+}
+
+.wrap {
+  background-color: $background-card;
+}
+
+a {
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 1.2em;
+  font-weight: 800;
+  text-align: right;
+  padding-right: 10px;
+  text-decoration: none;
+  color: $text-more;
+  background-color: $background-card;
+}
