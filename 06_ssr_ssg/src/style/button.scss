@@ -1,0 +1,23 @@
+@import './variables.scss';
+
+.button {
+  margin-top: 50px;
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 17px;
+  text-decoration: none;
+  background: $background-main;
+  display: inline-block;
+  padding: 12px 40px;
+  border: 2px solid transparent;
+  border-radius: 0px;
+  color: $btn-normal;
+  border-color: $btn-normal;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $btn-hoover;
+    color: $btn-hoover;
+  }
+}

@@ -1,0 +1,33 @@
+@import '../../../style/variables.scss';
+
+.copyright {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  line-height: 1.4;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.copyright a {
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 15px;
+  color: $text-not-found;
+  background-color: $background-main;
+  font-weight: 100;
+	margin: 3px;
+	text-decoration: underline;
+}
+
+.copyright span {
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 15px;
+  color: $text-copiright;
+  background-color: $background-main;
+  font-weight: 100;
+	margin: 3px;
+}

@@ -1,0 +1,44 @@
+@import '../../../style/variables.scss';
+
+* {
+  background-color: $background-input;
+  font-size: 15px;
+  font-family: 'Maven Pro', sans-serif;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.search-conatiner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.search-conatiner .search-bar {
+  width: 70%;
+  padding: 15px;
+  background: $background-input;
+  border-style: none;
+}
+
+input[type='text' i] {
+  background: $background-input;
+  width: 100%;
+  color: $text-grey;
+  border-style: none;
+}
+
+.btn-search {
+  background: $text-more;
+  width: 10%;
+  color: $text-color;
+  border-style: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
