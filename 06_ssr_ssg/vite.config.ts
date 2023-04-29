@@ -15,7 +15,14 @@ export default defineConfig({
       all: true,
       reporter: ['text', 'json', 'html'],
       include: ['src/**/*.tsx'],
-      exclude: ['src/**/*test.tsx', 'src/main.tsx', 'src/**/*.js', 'src/models/*'],
+      exclude: [
+        'src/**/*test.tsx',
+        'src/main.tsx',
+        'src/**/*.js',
+        'src/models/*',
+        'src/entry-client.tsx',
+        'src/entry-server.tsx',
+      ],
     },
   },
 });

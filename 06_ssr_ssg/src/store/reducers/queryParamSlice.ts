@@ -5,7 +5,7 @@ import { SearchParams } from '../../models/IArticles';
 import { _apiKey } from '../../services/app_keys';
 
 const initialState: SearchParams = {
-  q: '*',
+  q: '',
   sortBy: 'publishedAt',
   sources: '',
   page: '1',

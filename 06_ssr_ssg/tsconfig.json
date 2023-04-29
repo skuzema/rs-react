@@ -16,5 +16,5 @@
     "baseUrl": "./src",
     "resolveJsonModule": true
   },
-  "include": ["./src/**/*", "styled.d.ts", "./src/index.d.ts"]
+  "include": ["./src/**/*", "styled.d.ts", "./src/index.d.ts", "server.ts"]
 }

@@ -1,20 +1,9 @@
 import React from 'react';
-import { FieldError, UseFormRegister } from 'react-hook-form';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SelectField from './SelectField';
 import { useForm } from 'react-hook-form';
 import { TPCardForm } from '../../../models/IArticles';
-
-type TProps = {
-  label: string;
-  name: string;
-  defaultOption: string;
-  options: { label: string; value: string }[];
-  disabledOption: boolean;
-  register: ReturnType<UseFormRegister<TPCardForm>>;
-  error: FieldError | undefined;
-};
 
 describe('SelectField', () => {
   const options = [

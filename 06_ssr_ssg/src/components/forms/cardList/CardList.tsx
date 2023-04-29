@@ -45,7 +45,7 @@ const View = ({ arr }: ViewProps) => {
   const articles = arr.map((article: Article, index: number) => {
     return <Card key={index} data={article} />;
   });
-  return <div>{articles}</div>;
+  return <>{articles}</>;
 };
 
 View.propTypes = {
