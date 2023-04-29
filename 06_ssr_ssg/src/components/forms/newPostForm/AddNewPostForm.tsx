@@ -66,7 +66,7 @@ const AddNewPostForm = () => {
       select: data.select,
       check: data.check,
       gender: data.gender ? 'Female' : 'Male',
-      img_file: Array.isArray(data.img_file) && data.img_file.length > 0 ? data.img_file[0] : '',
+      img_file: data.img_file.length > 0 ? data.img_file[0] : '',
       image: '',
     };
     setFormSubmitted(true);

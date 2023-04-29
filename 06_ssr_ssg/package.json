@@ -9,7 +9,11 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .tsx,.ts",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "cypress": "npx start-server-and-test server http-get://localhost:3000 cypress:run && npx nyc report && npx nyc report --reporter=text-summary",
+    "cypress:open": "cypress open --e2e --browser chrome",
+    "cypress:run": "cypress run --e2e",
+    "cypress:e2e": "npx start-server-and-test server http-get://localhost:3000 cypress:open"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -25,6 +29,10 @@
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.10.4",
+    "@cypress/react": "^7.0.3",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "@testing-library/cypress": "^9.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
@@ -36,9 +44,12 @@
     "@typescript-eslint/parser": "^5.54.0",
     "@vitejs/plugin-react": "^3.1.0",
     "@vitest/coverage-c8": "^0.29.2",
+    "css-loader": "^6.7.3",
+    "cypress": "^12.11.0",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
@@ -48,8 +59,10 @@
     "prettier": "^2.8.4",
     "redux-mock-store": "^1.5.4",
     "sass": "^1.58.3",
+    "sass-loader": "^13.2.2",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
+    "vite-plugin-istanbul": "^4.0.1",
     "vitest": "^0.29.2"
   }
 }

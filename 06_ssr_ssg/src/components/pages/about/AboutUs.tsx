@@ -12,7 +12,9 @@ const AboutUsPage = () => {
           <div className="col-md-4 col-sm-6">
             <div className="box1">
               <img src="https://i.imgur.com/Ur43esv.jpg" alt="" />
-              <h3 className="title">William</h3>
+              <h3 data-testid="about-us" className="title">
+                William
+              </h3>
             </div>
           </div>
         </div>
